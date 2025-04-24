@@ -79,6 +79,17 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -239,7 +250,7 @@ GOOD LUCK 😀
     checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
     
     */
-
+/*
 const eurToUsd = 1.1;
 
 const movementUSD = movements.map((mov) => mov * eurToUsd);
@@ -256,3 +267,6 @@ const movementsDescriptions = movements.map((mov, i) => {
 });
 
 console.log(movementsDescriptions);
+*/
+
+// const accounts = [account1, account2, account3, account4];
