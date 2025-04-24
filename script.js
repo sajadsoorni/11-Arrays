@@ -82,6 +82,7 @@ displayMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -203,37 +204,55 @@ TEST DATA 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
-*/
 
 // const checkDogs = function (dogsJulia, dogsKate) {
-//   const mergedData = [...dogsJulia, ...dogsKate];
+  //   const mergedData = [...dogsJulia, ...dogsKate];
+  
+  //   mergedData.forEach(function (age, i) {
+    //     console.log(`Dog number ${i + 1} is an adult, and is ${age} years old`);
+    //   });
+    // };
+    
+    // const juliasData = [3, 5, 2, 12, 7];
+    // const katesData = [4, 1, 15, 8, 3];
+    
+    // const correctedJuliasData = [...juliasData.slice(1, 3)];
+    
+    // checkDogs(correctedJuliasData, katesData);
+    
+    const checkDogs = function (dogsJulia, dogsKate) {
+      const correctedDogsJulia = dogsJulia.slice();
+      correctedDogsJulia.splice(0, 1);
+      correctedDogsJulia.splice(-2);
+      
+      const mergedData = correctedDogsJulia.concat(dogsKate);
+      
+      mergedData.forEach(function (age, i) {
+        const type = age >= 3 ? 'adult 🐕' : 'puppy 🐶';
+        console.log(`Dog number ${i + 1} is an ${type}, and is ${age} years old`);
+      });
+    };
+    
+    const juliasData = [3, 5, 2, 12, 7];
+    const katesData = [4, 1, 15, 8, 3];
+    
+    checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+    
+    */
 
-//   mergedData.forEach(function (age, i) {
-//     console.log(`Dog number ${i + 1} is an adult, and is ${age} years old`);
-//   });
-// };
+const eurToUsd = 1.1;
 
-// const juliasData = [3, 5, 2, 12, 7];
-// const katesData = [4, 1, 15, 8, 3];
+const movementUSD = movements.map((mov) => mov * eurToUsd);
+console.log(movements);
+console.log(movementUSD);
 
-// const correctedJuliasData = [...juliasData.slice(1, 3)];
+const movementUSDfor = [];
+for (const mov of movements) movementUSDfor.push(mov * eurToUsd);
 
-// checkDogs(correctedJuliasData, katesData);
+console.log(movementUSDfor);
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  const correctedDogsJulia = dogsJulia.slice();
-  correctedDogsJulia.splice(0, 1);
-  correctedDogsJulia.splice(-2);
+const movementsDescriptions = movements.map((mov, i) => {
+  return `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`;
+});
 
-  const mergedData = correctedDogsJulia.concat(dogsKate);
-
-  mergedData.forEach(function (age, i) {
-    const type = age >= 3 ? 'adult 🐕' : 'puppy 🐶';
-    console.log(`Dog number ${i + 1} is an ${type}, and is ${age} years old`);
-  });
-};
-
-const juliasData = [3, 5, 2, 12, 7];
-const katesData = [4, 1, 15, 8, 3];
-
-checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+console.log(movementsDescriptions);
