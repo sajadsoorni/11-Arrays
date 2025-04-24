@@ -270,3 +270,21 @@ console.log(movementsDescriptions);
 */
 
 // const accounts = [account1, account2, account3, account4];
+
+// deposits
+const deposits = movements.filter((mov) => mov > 0);
+console.log(deposits);
+
+// depositsFor
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+// withdrawals
+const withdrawals = movements.filter((mov) => mov < 0);
+console.log(withdrawals);
+
+// withdrawalsFor
+const withdrawalsFor = [];
+for (const mov of movements) if (mov < 0) withdrawalsFor.push(mov);
+console.log(withdrawalsFor);
