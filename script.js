@@ -76,8 +76,13 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-
 displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -271,6 +276,9 @@ console.log(movementsDescriptions);
 
 // const accounts = [account1, account2, account3, account4];
 
+/*
+// 159-filter-method
+
 // deposits
 const deposits = movements.filter((mov) => mov > 0);
 console.log(deposits);
@@ -288,3 +296,26 @@ console.log(withdrawals);
 const withdrawalsFor = [];
 for (const mov of movements) if (mov < 0) withdrawalsFor.push(mov);
 console.log(withdrawalsFor);
+*/
+
+console.log(movements);
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance);
+
+let balanceFor = 0;
+for (const mov of movements) balanceFor += mov;
+
+console.log(balanceFor);
+
+// Maximum value
+
+const max = movements.reduce((acc, cur) => {
+  if (cur > acc) return cur;
+  return acc;
+});
+
+console.log(max);
+
+const maxInline = movements.reduce((acc, cur) => (cur > acc ? cur : acc));
+console.log(maxInline);
