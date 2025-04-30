@@ -554,6 +554,9 @@ console.log(latestLargeMovementIndex);
 console.log(`your latest large movements was ${movements.length - latestLargeMovementIndex} movements ago `);
 */
 
+/*
+// 169-some-and-every
+
 // EQUALITY
 console.log(movements);
 console.log(movements.includes(-130));
@@ -575,3 +578,21 @@ const deposit = (mov) => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+*/
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// flat
+const overalBalance = accounts
+  .map((mov) => mov.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatMap
+const overalBalance2 = accounts.flatMap((mov) => mov.movements).reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
