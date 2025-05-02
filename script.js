@@ -61,11 +61,14 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
   // .textContent = 0
 
-  movements.forEach(function (mov, i) {
+  const moves = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  console.log(moves);
+
+  moves.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = ` 
        <div class="movements__row">
@@ -200,6 +203,13 @@ btnClose.addEventListener('click', function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sortedState = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sortedState);
+  sortedState = !sortedState;
 });
 
 /////////////////////////////////////////////////
@@ -622,7 +632,6 @@ BONUS: What's the average weight of the heaviest breed that likes to fetch? HINT
  along with the ... operator.
 
 TEST DATA:
-*/
 
 const breeds = [
   {
@@ -684,7 +693,7 @@ const swimAdjacent = new Set(
   //   .filter((breed) => breed.activities.includes('swimming'))
   //   .flatMap((breed) => breed.activities)
   //   .filter((act) => act !== 'swimming')
-
+  
   breeds.flatMap((b) => (b.activities.includes('swimming') ? b.activities.filter((act) => act !== 'swimming') : []))
 );
 console.log(swimAdjacent);
@@ -698,11 +707,11 @@ console.log(breeds.some((b) => b.activities.length >= 3));
 
 // BONUS
 const fatestFetch = breeds
-  .filter((b) => b.activities.includes('fetch'))
-  .reduce((acc, cur) => {
-    if (cur.averageWeight > acc.averageWeight) return cur;
-    return acc;
-  }).breed;
+.filter((b) => b.activities.includes('fetch'))
+.reduce((acc, cur) => {
+  if (cur.averageWeight > acc.averageWeight) return cur;
+  return acc;
+}).breed;
 console.log(fatestFetch);
 console.log('------------------');
 // Jonas Solution:
@@ -712,3 +721,30 @@ const fetchWeights = breeds.filter((b) => b.activities.includes('fetch')).map((b
 const heaviestFetchBreed = Math.max(...fetchWeights);
 console.log(...fetchWeights);
 console.log(heaviestFetchBreed);
+*/
+
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers
+console.log(movements);
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
