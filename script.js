@@ -779,6 +779,7 @@ const groupedAccounts = Object.groupBy(accounts, ({ type }) => type);
 console.log(groupedAccounts);
 */
 
+/*
 // 174. More Ways of Creating and Filling Arrays
 
 // answers: new Array(4).fill(0),
@@ -819,3 +820,15 @@ labelBalance.addEventListener('click', function () {
 
   console.log(movementsUI2);
 });
+*/
+
+// 175. Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
+console.log(movements);
+const reversedMov = movements.toReversed();
+console.log(reversedMov);
+
+// toSorted (sort). toSpliced (splice)
+// movements[1] = 2000;
+const newMovments = movements.with(1, 2000);
+console.log(newMovments);
+console.log(movements);
