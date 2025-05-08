@@ -23,7 +23,7 @@ const account2 = {
 
 const account3 = {
   owner: 'Steven Thomas Williams',
-  movements: [200, -200],
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
   type: 'basic',
@@ -822,6 +822,7 @@ labelBalance.addEventListener('click', function () {
 });
 */
 
+/*
 // 175. Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
 console.log(movements);
 const reversedMov = movements.toReversed();
@@ -832,3 +833,89 @@ console.log(reversedMov);
 const newMovments = movements.with(1, 2000);
 console.log(newMovments);
 console.log(movements);
+*/
+
+///////////////////////////////////////
+// Array Methods Practice
+
+// 1.
+const banKDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((acc, cur) => acc + cur, 0);
+
+console.log(banKDepositSum);
+
+// 2.
+// const numDeposits1000 = accounts.flatMap((acc) => acc.movements).filter((m) => m > 1000).length;
+const numDeposits1000 = accounts.flatMap((acc) => acc.movements).reduce((acc, cur) => (cur > 1000 ? ++acc : acc), 0);
+console.log(numDeposits1000);
+
+// Prefixed ++ operator
+let a = 10;
+console.log(++a);
+console.log(a);
+
+// 3.
+// const sums = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (acc, cur) => ({
+//       deposits: cur > 0 ? acc.deposits + cur : acc.deposits,
+//       withdrawals: cur < 0 ? acc.withdrawals + cur : acc.withdrawals,
+//     }),
+//     { deposits: 0, withdrawals: 0 }
+//   );
+// console.log(sums);
+
+// const sums = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce((acc, cur) => {
+//     acc.deposits = (acc.deposits || 0) + (cur > 0 ? cur : 0);
+//     acc.withdrawals = (acc.withdrawals || 0) + (cur < 0 ? cur : 0);
+//     return acc;
+//   }, {});
+// console.log(sums);
+
+// const { deposits, withdrawals } = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (acc, cur) => {
+//       // cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+//       acc[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+//       return acc;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+// console.log(deposits, withdrawals);
+
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      acc[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return acc;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log(deposits, withdrawals);
+
+// 4.
+// this is a nice title => This Is a Nice Title
+
+const convertTitleCase = function (title) {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'be', 'and'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+console.log(convertTitleCase('A java script code musT be clean allways'));
